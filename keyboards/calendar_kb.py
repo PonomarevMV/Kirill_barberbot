@@ -6,7 +6,7 @@ import calendar
 
 calendar_callback = CallbackData('simple_calendar', 'act', 'year', 'month', 'day')
 
-class SimpleCalendar:
+class SimpleCalendar():
 
     async def simple_start(self, year = int(datetime.now().year), month = int( datetime.now().month)):
         ignore_callback = calendar_callback.new("IGNORE", year, month, 0)
