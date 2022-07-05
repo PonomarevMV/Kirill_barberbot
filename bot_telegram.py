@@ -1,4 +1,4 @@
-﻿from os import environ
+﻿import os
 from aiogram.dispatcher.filters import Text
 from aiogram.types import Message, CallbackQuery, ReplyKeyboardMarkup, reply_keyboard
 from aiogram.utils import executor
@@ -58,6 +58,6 @@ executor.start_webhook(
     on_startup= on_startup,
     on_shutdown= on_shutdown,
     skip_updates= True,
-    host = "0.0.0.0"
+    host= "0.0.0.0"
     port= int(os.environ.get("PORT", 5000))
     )
