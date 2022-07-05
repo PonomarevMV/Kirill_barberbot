@@ -1,1 +1,1 @@
-worker: bot_run.bat
+web: python bot_telegram.py

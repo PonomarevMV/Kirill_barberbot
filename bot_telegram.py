@@ -1,17 +1,22 @@
-﻿from aiogram.dispatcher.filters import Text
+﻿from os import environ
+from aiogram.dispatcher.filters import Text
 from aiogram.types import Message, CallbackQuery, ReplyKeyboardMarkup, reply_keyboard
 from aiogram.utils import executor
 from aiogram.utils.callback_data import CallbackData
-from create_bot import dp
+from create_bot import dp, bot
 from keyboards import simple_cal_callback, SimpleCalendar, selected_time, chose_service
 from base_date import sql_date
 from handlers.client_handlers import register_handler_client
+import config
 
 
-async def on_startup(_):
+async def on_startup(dp):
     print("Бот вышел в онлайн")
     sql_date.sql_start()
+    await bot.set_webhook(config.URL_APP)
 
+async def on_shutdown(dp):
+    await bot.delete_webhook()
 
 
 register_handler_client( dp )
@@ -47,4 +52,12 @@ async def answer (callback_query: CallbackQuery):
     #await callback_query.answer(text = 'You writen to vizit, thnks for user our app!')
 '''
 
-executor.start_polling(dp, skip_updates= True, on_startup= on_startup)
+executor.start_webhook(
+    dispatcher= dp,
+    webhook_path='',
+    on_startup= on_startup,
+    on_shutdown= on_shutdown,
+    skip_updates= True,
+    host = "0.0.0.0"
+    port= int(os.environ.get("PORT", 5000))
+    )

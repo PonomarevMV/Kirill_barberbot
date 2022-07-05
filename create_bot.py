@@ -1,6 +1,7 @@
 from aiogram import Bot
 from aiogram.dispatcher import Dispatcher
 import os
+import config
 
-bot = Bot(token = os.getenv('TOKEN'))
+bot = Bot(token = config.TOKEN)
 dp = Dispatcher(bot)
