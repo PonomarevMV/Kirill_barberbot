@@ -5,18 +5,22 @@ from aiogram.utils import executor
 from aiogram.utils.callback_data import CallbackData
 from create_bot import dp, bot
 from keyboards import simple_cal_callback, SimpleCalendar, selected_time, chose_service
-from base_date import sql_date
+from base_date import postgrepsql
 from handlers.client_handlers import register_handler_client
 import config
 
 
+
 async def on_startup(dp):
     print("Бот вышел в онлайн")
-    sql_date.sql_start()
+    postgrepsql.sql_start()
     await bot.set_webhook(config.URL_APP)
 
 async def on_shutdown(dp):
     await bot.delete_webhook()
+    postgrepsql.cur.close()
+    postgrepsql.base.close()
+
 
 
 register_handler_client( dp )

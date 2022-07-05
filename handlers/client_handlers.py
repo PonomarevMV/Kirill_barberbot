@@ -5,7 +5,7 @@ from aiogram.utils.callback_data import CallbackData
 from aiogram.dispatcher.filters import Text
 from keyboards.service_kb import callback_service
 from keyboards.time_kb import time_callback_data
-from base_date import sql_date
+from base_date import postgrepsql
 
 #словарь для добавление выбора услуг клиента
 user_service = {}
@@ -23,7 +23,7 @@ async def chouse_date (message : types.Message ):
 #Хэндлер отлавливающий нажатие кнопки "Мои записи"
 #dp.message_handler ( Text (equals=['My entries'], ignore_case= True) )
 async def my_entries( message: types.Message ):
-    await sql_date.sql_read(message)
+    await postgrepsql.sql_read(message)
 
 #Выбор даты в календаре и его запись в словарь
 #@dp.callback_query_handler(simple_cal_callback.filter(), state = ClientService.chouse_date)
@@ -55,7 +55,7 @@ async def answer (callback_query: CallbackQuery, callback_data: dict ):
     await callback_query.message.answer(text = 'You writen to vizit, thnks for user our app!')
     user_service[ callback_query.from_user.id ].append( callback_data['time'] )
     print( user_service )
-    await sql_date.sql_add_command( callback_query.from_user.id,  user_service[ callback_query.from_user.id ])
+    await postgrepsql.sql_add_command( callback_query.from_user.id,  user_service[ callback_query.from_user.id ])
     await callback_query.message.delete_reply_markup()
     await callback_query.message.delete()
 
