@@ -58,6 +58,5 @@ executor.start_webhook(
     on_startup= on_startup,
     on_shutdown= on_shutdown,
     skip_updates= True,
-    host= "0.0.0.0"
-    port= int(os.environ.get("PORT", 5000))
-    )
+    host= "0.0.0.0",
+    port= int(os.environ.get("PORT", 5000)))
