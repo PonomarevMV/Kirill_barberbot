@@ -17,10 +17,10 @@ async def sql_add_command(id, date):
     for i in date:
         x.append(i)
     x[1] = x[1].strftime("%d:%m:%Y")
-    cur.executemany ('INSERT INTO data VALUES (?, ?, ?, ?)', (x, ) )
+    cur.executemany ('INSERT INTO entry VALUES (?, ?, ?, ?)', (x, ) )
     base.commit()
 
  #Функция отправки записей клиента
 async def sql_read( message ):
-    for ret in cur.execute('SELECT * FROM data WHERE id ==?', ( message.from_user.id, ) ).fetchall():
+    for ret in cur.execute('SELECT * FROM entry WHERE id ==?', ( message.from_user.id, ) ).fetchall():
         await bot.send_message( message.from_user.id, f'Your entries\n {ret[1]} {ret[-1]} {ret[2]}' )
