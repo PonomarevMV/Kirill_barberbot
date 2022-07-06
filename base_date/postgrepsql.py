@@ -17,7 +17,7 @@ async def sql_add_command(id, date):
     for i in date:
         x.append(i)
     x[1] = x[1].strftime("%d:%m:%Y")
-    cur.executemany ("INSERT INTO entry (id, date, service, time) VALUES (%s, %s, %s, %s)", x)
+    cur.execute ("INSERT INTO entry (id, date, service, time) VALUES (%s, %s, %s, %s)", x)
     base.commit()
 
  #Функция отправки записей клиента
