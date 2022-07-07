@@ -19,7 +19,7 @@ async def sql_add_command(id, date):
     x[1] = x[1].strftime("%d:%m:%Y")
     try:
         cur.executemany ("INSERT INTO entry (id, date, service, time) VALUES (%s, %s, %s, %s)", (12345, '27:07.2022', 'Model heircat', '17:30' ) )
-    except ps.DatabaseError as err
+    except ps.DatabaseError as err:
         print("Error: ", err)
     base.commit()
 
