@@ -17,12 +17,8 @@ async def sql_add_command(id, date):
     for i in date:
         x.append(i)
     x[1] = x[1].strftime("%d:%m:%Y")
-    print(x)
-    for i in x:
-        print( type(i) )
-
-    #cur.execute ("INSERT INTO entry (id, date, service, time) VALUES (%s, %s, %s, %s)", x)
-    #base.commit()
+    cur.execute ("INSERT INTO entry (id, date, service, time) VALUES (%1, %s, %s, %s)", x)
+    base.commit()
 
  #Функция отправки записей клиента
 async def sql_read( message ):
