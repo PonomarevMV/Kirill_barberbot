@@ -19,7 +19,7 @@ async def sql_add_command(id, date):
     x[1] = x[1].strftime("%d:%m:%Y")
     print(x)
     for i in x:
-        print( type(x) )
+        print( type(i) )
 
     #cur.execute ("INSERT INTO entry (id, date, service, time) VALUES (%s, %s, %s, %s)", x)
     #base.commit()
