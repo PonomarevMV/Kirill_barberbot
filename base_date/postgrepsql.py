@@ -13,7 +13,7 @@ def sql_start():
 
 #функция добавления в БД
 async def sql_add_command(id, date):
-    x= [id]
+    x= [ыек(id)]
     for i in date:
         x.append(i)
     x[1] = x[1].strftime("%d:%m:%Y")
