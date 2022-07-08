@@ -18,8 +18,7 @@ async def sql_add_command(id, date):
         x.append(i)
     x[1] = x[1].strftime("%d:%m:%Y")
     try:
-        SQL = f'INSERT INTO entry (id, date, service, time) VALUES (\'{}\', \'{}\', \'{}\', \'{}\''.format(x[0], x[1], x[2], x[3])
-        cur.execute (SQL)
+        cur.execute (' INSERT INTO entry (id, date, service, time) Values (%s, %s, %s, %s)', ( {1}, {2}, {3}, {4} )).formaat(x[0], x[1], x[2], x[3])
     except ps.DatabaseError as err:
         print("Error: ", err)
     base.commit()
