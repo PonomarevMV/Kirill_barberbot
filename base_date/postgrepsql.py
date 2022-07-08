@@ -25,5 +25,6 @@ async def sql_add_command(id, date):
 
  #Функция отправки записей клиента
 async def sql_read( message ):
-    for ret in cur.execute('SELECT * FROM entry WHERE id = %s', ( message.from_user.id, ) ):
+    x = message.from_user.id
+    for ret in cur.execute('SELECT * FROM entry WHERE id=%s', [x] ):
         await bot.send_message( message.from_user.id, f'Your entries\n {ret[1]} {ret[-1]} {ret[2]}' )
